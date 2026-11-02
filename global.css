@@ -1,87 +1,82 @@
 @import "tailwindcss";
 @import "uniwind";
-
-@import "tw-animate-css"; 
+@import "tw-animate-css";
 
 @theme {
+  --color-background: #ECEFF4;
+  --color-surface: #E5E9F0;
+  --color-foreground: #2E3440;
+  --color-primary: #49688E;
+  --color-primary-foreground: #ECEFF4;
+  --color-accent-soft: #DFE4EC;
+  --color-positive: #556F3F;
+  --color-negative: #AE4750;
+  --color-neutral: #D8DEE9;
+  --color-border: #C5CCD9;
+  --color-text-secondary: var(--secondary);
+  --color-text-muted: var(--muted);
+
+  /* RNR-compatible aliases to the same semantic palette. */
+  --color-card: var(--color-surface);
+  --color-card-foreground: var(--color-foreground);
+  --color-popover: var(--color-surface);
+  --color-popover-foreground: var(--color-foreground);
+  /* RNR's secondary/muted utilities are fills; foreground aliases carry text roles. */
+  --color-secondary: var(--color-surface);
+  --color-secondary-foreground: var(--color-foreground);
+  --color-muted: var(--color-neutral);
+  --color-muted-foreground: var(--color-text-muted);
+  --color-accent: var(--color-accent-soft);
+  --color-accent-foreground: var(--color-foreground);
+  --color-destructive: var(--color-negative);
+  --color-input: var(--color-border);
+  --color-ring: var(--color-primary);
+
+  /* Keep aliases used by the existing starter screen. */
+  --color-text-primary: var(--color-foreground);
+  --color-free: var(--color-positive);
+  --color-busy: var(--color-negative);
+  --color-avatar-fill: var(--color-neutral);
+
+  /* Preserve the template's existing shape tokens. */
   --radius: 10px;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-
   --spacing-hairline: hairlineWidth();
 }
 
 @layer theme {
   :root {
     @variant light {
-    --color-background:  oklch(1 0 0);
-    --color-foreground:  oklch(0.145 0 0);
-    --color-card:  oklch(1 0 0);
-    --color-card-foreground:  oklch(0.145 0 0);
-    --color-popover:  oklch(1 0 0);
-    --color-popover-foreground:  oklch(0.145 0 0);
-    --color-primary:  oklch(0.205 0 0);
-    --color-primary-foreground:  oklch(0.985 0 0);
-    --color-secondary:  oklch(0.97 0 0);
-    --color-secondary-foreground:  oklch(0.205 0 0);
-    --color-muted:  oklch(0.97 0 0);
-    --color-muted-foreground:  oklch(0.556 0 0);
-    --color-accent:  oklch(0.97 0 0);
-    --color-accent-foreground:  oklch(0.205 0 0);
-    --color-destructive:  oklch(0.577 0.245 27.325);
-    --color-border:  oklch(0.922 0 0);
-    --color-input:  oklch(0.922 0 0);
-    --color-ring:  oklch(0.708 0 0);
-    --color-chart-1:  oklch(0.646 0.222 41.116);
-    --color-chart-2:  oklch(0.6 0.118 184.704);
-    --color-chart-3:  oklch(0.398 0.07 227.392);
-    --color-chart-4:  oklch(0.828 0.189 84.429);
-    --color-chart-5:  oklch(0.769 0.188 70.08);
-    --color-sidebar:  oklch(0.985 0 0);
-    --color-sidebar-foreground:  oklch(0.145 0 0);
-    --color-sidebar-primary:  oklch(0.205 0 0);
-    --color-sidebar-primary-foreground:  oklch(0.985 0 0);
-    --color-sidebar-accent:  oklch(0.97 0 0);
-    --color-sidebar-accent-foreground:  oklch(0.205 0 0);
-    --color-sidebar-border:  oklch(0.922 0 0);
-    --color-sidebar-ring:  oklch(0.708 0 0);
+      --color-background: #ECEFF4;
+      --color-surface: #E5E9F0;
+      --color-foreground: #2E3440;
+      --color-primary: #49688E;
+      --color-primary-foreground: #ECEFF4;
+      --color-accent-soft: #DFE4EC;
+      --color-positive: #556F3F;
+      --color-negative: #AE4750;
+      --secondary: #4C566A;
+      --muted: #5D6982;
+      --color-neutral: #D8DEE9;
+      --color-border: #C5CCD9;
     }
 
     @variant dark {
-      --color-background:  oklch(0.145 0 0);
-      --color-foreground:  oklch(0.985 0 0);
-      --color-card:  oklch(0.205 0 0);
-      --color-card-foreground:  oklch(0.985 0 0);
-      --color-popover:  oklch(0.205 0 0);
-      --color-popover-foreground:  oklch(0.985 0 0);
-      --color-primary:  oklch(0.922 0 0);
-      --color-primary-foreground:  oklch(0.205 0 0);
-      --color-secondary:  oklch(0.269 0 0);
-      --color-secondary-foreground:  oklch(0.985 0 0);
-      --color-muted:  oklch(0.269 0 0);
-      --color-muted-foreground:  oklch(0.708 0 0);
-      --color-accent:  oklch(0.269 0 0);
-      --color-accent-foreground:  oklch(0.985 0 0);
-      --color-destructive:  oklch(0.704 0.191 22.216);
-      --color-border:  oklch(1 0 0 / 10%);
-      --color-input:  oklch(1 0 0 / 15%);
-      --color-ring:  oklch(0.556 0 0);
-      --color-chart-1:  oklch(0.488 0.243 264.376);
-      --color-chart-2:  oklch(0.696 0.17 162.48);
-      --color-chart-3:  oklch(0.769 0.188 70.08);
-      --color-chart-4:  oklch(0.627 0.265 303.9);
-      --color-chart-5:  oklch(0.645 0.246 16.439);
-      --color-sidebar:  oklch(0.205 0 0);
-      --color-sidebar-foreground:  oklch(0.985 0 0);
-      --color-sidebar-primary:  oklch(0.488 0.243 264.376);
-      --color-sidebar-primary-foreground:  oklch(0.985 0 0);
-      --color-sidebar-accent:  oklch(0.269 0 0);
-      --color-sidebar-accent-foreground:  oklch(0.985 0 0);
-      --color-sidebar-border:  oklch(1 0 0 / 10%);
-      --color-sidebar-ring:  oklch(0.556 0 0);
+      --color-background: #2E3440;
+      --color-surface: #3B4252;
+      --color-foreground: #ECEFF4;
+      --color-primary: #88C0D0;
+      --color-primary-foreground: #2E3440;
+      --color-accent-soft: #3C4956;
+      --color-positive: #A3BE8C;
+      --color-negative: #D89FA4;
+      --secondary: #D8DEE9;
+      --muted: #A6AFC0;
+      --color-neutral: #4C566A;
+      --color-border: #4C566A;
     }
   }
 }
-
