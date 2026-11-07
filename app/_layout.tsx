@@ -19,7 +19,12 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={NAV_THEME[theme ?? 'light']}>
       <StatusBar style={theme === 'dark' ? 'light' : 'dark'} />
-      <Tabs initialRouteName="calendar" screenOptions={{ headerShown: true }}>
+      <Tabs
+        initialRouteName="calendar"
+        screenOptions={{
+          headerShown: true,
+        }}
+      >
         <Tabs.Screen
           name="calendar"
           options={{

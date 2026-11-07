@@ -1,4 +1,4 @@
-import { Checkbox, Host } from '@expo/ui';
+import { Checkbox } from '@/components/ui/checkbox';
 
 type TodoCheckboxProps = {
   checked: boolean;
@@ -7,8 +7,6 @@ type TodoCheckboxProps = {
 
 export function TodoCheckbox({ checked, onChange }: TodoCheckboxProps) {
   return (
-    <Host matchContents>
-      <Checkbox value={checked} onValueChange={onChange} />
-    </Host>
+    <Checkbox checked={checked} onCheckedChange={onChange} />
   );
 }

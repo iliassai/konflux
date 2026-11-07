@@ -12,13 +12,13 @@ export function TodoList() {
   return (
     <View className="w-full gap-3">
       {todos.map((todo) => (
-        <Card key={todo.id} className="py-3">
-          <CardContent className="flex-row items-center gap-1">
+        <Card key={todo.id} className="rounded-2x1 border border-border bg-card py-3 shadow-none">
+          <CardContent className="flex-row items-center gap-3 px-4">
             <TodoCheckbox
               checked={todo.done}
               onChange={() => toggleTodo(todo.id)}
             />
-            <Text className={`flex-1 ${todo.done ? 'text-muted-foreground' : ''}`}>
+            <Text className={`flex-1 font-medium ${todo.done ? 'text-muted-foreground line-through' : ''}`}>
               {todo.title}
             </Text>
             <Badge variant="secondary">
