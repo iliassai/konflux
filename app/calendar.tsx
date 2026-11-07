@@ -2,10 +2,20 @@ import { Text } from '@/components/ui/text';
 import { TodoList } from '@/components/todo-component';
 import { EventList } from '@/components/events/event-list';
 import { ScrollView, View } from 'react-native';
+import { useState } from 'react';
+import { CalendarHeader, type CalendarView } from '@/components/calendar/calendar-header';
+import { WeekDateSelector } from '@/components/calendar/week-date-selector';
 
 export default function CalendarScreen() {
+  const [selectedDate, setSelectedDate] = useState(() => new Date());
+  const [view, setView] = useState<CalendarView>('week');
+
   return (
-      <ScrollView className="flex-1 bg-background" contentContainerClassName="gap-6 p-6">
+      <ScrollView
+        className="flex-1 bg-background"
+        contentContainerClassName="gap-5 px-5 pb-5 pt-14">
+        <CalendarHeader date={selectedDate} view={view} onViewChange={setView} />
+        <WeekDateSelector selectedDate={selectedDate} onDateChange={setSelectedDate} />
         <View className="gap-3">
           <Text className="text-xs font-medium uppercase tracking-widest text-muted-foreground">Events</Text>
           <EventList />

@@ -22,7 +22,7 @@ export default function RootLayout() {
       <Tabs
         initialRouteName="calendar"
         screenOptions={{
-          headerShown: true,
+          headerShown: false,
         }}
       >
         <Tabs.Screen

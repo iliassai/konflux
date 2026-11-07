@@ -9,7 +9,7 @@ type EventCardProps = {
 
 export function EventCard({ event }: EventCardProps) {
   return (
-    <Card className="rounded-2xl border border-border bg-card py-3 shadow-none">
+    <Card className="rounded-md border border-border bg-card py-3 shadow-none">
       <CardContent className="flex-row items-center gap-3 px-4">
         <View className="h-11 w-1 rounded-full" style={{ backgroundColor: event.color }} />
         <View className="flex-1 gap-0.5">
