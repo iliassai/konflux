@@ -6,6 +6,8 @@ import { useState } from 'react';
 import { CalendarHeader, type CalendarView } from '@/components/calendar/calendar-header';
 import { WeekDateSelector } from '@/components/calendar/week-date-selector';
 import { VotePromptCard } from '@/components/events/vote-prompt-card';
+import { FloatingActionButton } from '@/components/ui/floating-action-button';
+import { MonthDateSelector } from '@/components/calendar/month-date-selector';
 
 export default function CalendarScreen() {
   const [selectedDate, setSelectedDate] = useState(() => new Date());
@@ -14,11 +16,17 @@ export default function CalendarScreen() {
   const mockVoteIsOpen = true;
 
   return (
-      <ScrollView
-        className="flex-1 bg-background"
-        contentContainerClassName="gap-5 px-5 pb-5 pt-14">
+      <View className="flex-1 bg-background">
+        <ScrollView
+          className="flex-1"
+          showsVerticalScrollIndicator={false}
+          contentContainerClassName="gap-5 px-5 pb-24 pt-14">
         <CalendarHeader date={selectedDate} view={view} onViewChange={setView} />
-        <WeekDateSelector selectedDate={selectedDate} onDateChange={setSelectedDate} />
+        {view === 'week' ? (
+          <WeekDateSelector selectedDate={selectedDate} onDateChange={setSelectedDate} />
+        ) : (
+          <MonthDateSelector selectedDate={selectedDate} onDateChange={setSelectedDate} />
+        )}
         {mockVoteIsOpen && (
           <VotePromptCard
             title="Valorant night"
@@ -35,6 +43,8 @@ export default function CalendarScreen() {
           <Text className="text-xs font-medium uppercase tracking-widest text-muted-foreground">To do</Text>
           <TodoList />
         </View>
-      </ScrollView>
+        </ScrollView>
+        <FloatingActionButton accessibilityLabel="Add event or to-do" />
+      </View>
   );
 }

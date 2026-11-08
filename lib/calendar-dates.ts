@@ -10,3 +10,10 @@ export function addDays(date: Date, amount: number) {
   result.setDate(result.getDate() + amount);
   return result;
 }
+
+export function addMonths(date: Date, amount: number) {
+  const result = new Date(date.getFullYear(), date.getMonth() + amount, 1);
+  const lastDay = new Date(result.getFullYear(), result.getMonth() + 1, 0).getDate();
+  result.setDate(Math.min(date.getDate(), lastDay));
+  return result;
+}

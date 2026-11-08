@@ -21,7 +21,7 @@ export function CalendarHeader({ date, view, onViewChange }: CalendarHeaderProps
 
   return (
     <View className="gap-3">
-      <Text className="text-base text-muted-foreground">{monthLabel}</Text>
+      {view === 'week' && <Text className="text-base text-muted-foreground">{monthLabel}</Text>}
       <View className="flex-row items-center justify-between">
         <Text className="text-3xl font-bold">{title}</Text>
         <View className="flex-row rounded-md bg-card p-1">
