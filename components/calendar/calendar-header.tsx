@@ -1,5 +1,6 @@
 import { Text } from '@/components/ui/text';
 import { Pressable, View } from 'react-native';
+import { RotateCcw } from 'lucide-react-native';
 
 export type CalendarView = 'week' | 'month';
 
@@ -7,9 +8,10 @@ type CalendarHeaderProps = {
   date: Date;
   view: CalendarView;
   onViewChange: (view: CalendarView) => void;
+  onTodayPress: () => void;
 };
 
-export function CalendarHeader({ date, view, onViewChange }: CalendarHeaderProps) {
+export function CalendarHeader({ date, view, onViewChange, onTodayPress }: CalendarHeaderProps) {
   const monthLabel = new Intl.DateTimeFormat(undefined, {
     month: 'long',
     year: 'numeric',
@@ -21,9 +23,27 @@ export function CalendarHeader({ date, view, onViewChange }: CalendarHeaderProps
 
   return (
     <View className="gap-3">
-      {view === 'week' && <Text className="text-base text-muted-foreground">{monthLabel}</Text>}
+      <View className="h-8 flex-row items-center justify-between">
+        {view === 'week' ? (
+          <Text className="text-base text-muted-foreground">{monthLabel}</Text>
+        ) : (
+          <View />
+        )}
+        {!isToday && (
+          <Pressable
+            accessibilityRole="button"
+            accessibilityLabel="Go to today"
+            onPress={onTodayPress}
+            hitSlop={8}
+            className="size-8 items-center justify-center rounded-md">
+            <RotateCcw size={18} color="#5D6982" />
+          </Pressable>
+        )}
+      </View>
       <View className="flex-row items-center justify-between">
-        <Text className="text-3xl font-bold">{title}</Text>
+        <Text className="flex-1 text-2xl font-bold" numberOfLines={1}>
+          {title}
+        </Text>
         <View className="flex-row rounded-md bg-card p-1">
           {(['week', 'month'] as const).map((option) => {
             const selected = view === option;

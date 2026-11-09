@@ -20,8 +20,13 @@ export default function CalendarScreen() {
         <ScrollView
           className="flex-1"
           showsVerticalScrollIndicator={false}
-          contentContainerClassName="gap-5 px-5 pb-24 pt-14">
-        <CalendarHeader date={selectedDate} view={view} onViewChange={setView} />
+          contentContainerClassName="gap-5 px-5 pb-24 pt-10">
+        <CalendarHeader
+          date={selectedDate}
+          view={view}
+          onViewChange={setView}
+          onTodayPress={() => setSelectedDate(new Date())}
+        />
         {view === 'week' ? (
           <WeekDateSelector selectedDate={selectedDate} onDateChange={setSelectedDate} />
         ) : (
