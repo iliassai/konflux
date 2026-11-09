@@ -33,9 +33,9 @@ export default function RootLayout() {
           }}
         />
         <Tabs.Screen
-          name="tasks"
+          name="plans"
           options={{
-            title: 'Tasks',
+            title: 'Plans',
             tabBarIcon: ({ color, size }) => <ListTodo color={color} size={size} />,
           }}
         />

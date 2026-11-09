@@ -4,7 +4,7 @@ import { View } from 'react-native';
 export default function TasksScreen() {
   return (
     <View className="flex-1 items-center justify-center bg-background">
-      <Text className="text-2xl text-foreground">Tasks</Text>
+      <Text className="text-2xl text-foreground">Plans</Text>
     </View>
   );
 }
