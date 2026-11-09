@@ -8,6 +8,11 @@ import { WeekDateSelector } from '@/components/calendar/week-date-selector';
 import { VotePromptCard } from '@/components/events/vote-prompt-card';
 import { FloatingActionButton } from '@/components/ui/floating-action-button';
 import { MonthDateSelector } from '@/components/calendar/month-date-selector';
+import Animated, {
+  FadeInDown,
+  FadeOutUp,
+  LinearTransition,
+} from 'react-native-reanimated';
 
 export default function CalendarScreen() {
   const [selectedDate, setSelectedDate] = useState(() => new Date());
@@ -27,11 +32,17 @@ export default function CalendarScreen() {
           onViewChange={setView}
           onTodayPress={() => setSelectedDate(new Date())}
         />
-        {view === 'week' ? (
-          <WeekDateSelector selectedDate={selectedDate} onDateChange={setSelectedDate} />
-        ) : (
-          <MonthDateSelector selectedDate={selectedDate} onDateChange={setSelectedDate} />
-        )}
+        <Animated.View
+          key={view}
+          entering={FadeInDown.duration(220)}
+          exiting={FadeOutUp.duration(160)}
+          layout={LinearTransition.duration(220)}>
+          {view === 'week' ? (
+            <WeekDateSelector selectedDate={selectedDate} onDateChange={setSelectedDate} />
+          ) : (
+            <MonthDateSelector selectedDate={selectedDate} onDateChange={setSelectedDate} />
+          )}
+        </Animated.View>
         {mockVoteIsOpen && (
           <VotePromptCard
             title="Valorant night"
