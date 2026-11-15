@@ -15,6 +15,7 @@ export type GroupCardData = {
 };
 
 const visibilityLabels: Record<AvailabilityVisibility, string> = {
+  hidden: 'Hidden',
   busy_only: 'Busy only',
   titles: 'Titles',
   full: 'Full',

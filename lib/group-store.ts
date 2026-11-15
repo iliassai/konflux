@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-export type AvailabilityVisibility = 'busy_only' | 'titles' | 'full';
+export type AvailabilityVisibility = 'hidden' | 'busy_only' | 'titles' | 'full';
 
 export type Group = {
   id: string;
@@ -49,11 +49,16 @@ type GroupStore = {
   memberships: GroupMembership[];
   plans: GroupPlan[];
   votes: PlanVote[];
+  setAvailabilityVisibility: (
+    groupId: string,
+    userId: string,
+    visibility: AvailabilityVisibility
+  ) => void;
 };
 
-export const useGroupStore = create<GroupStore>(() => ({
+export const useGroupStore = create<GroupStore>((set) => ({
   groups: [
-    { id: 'gaming-crew', name: 'Gaming crew', memberIds: ['sam', 'omar', 'hana'] },
+    { id: 'gaming-crew', name: 'Gaming crew', memberIds: ['sam', 'omar', 'hana', 'ilyas'] },
     { id: 'study-group', name: 'Study group', memberIds: ['yasmine', 'lina', 'mehdi', 'adam', 'nora'] },
     { id: 'family', name: 'Family', memberIds: ['mona', 'daoud', 'nada', 'ali', 'sara'] },
   ],
@@ -61,6 +66,7 @@ export const useGroupStore = create<GroupStore>(() => ({
     { id: 'sam', initials: 'SA', name: 'Sam' },
     { id: 'omar', initials: 'OM', name: 'Omar' },
     { id: 'hana', initials: 'HA', name: 'Hana' },
+    { id: 'ilyas', initials: 'IE', name: 'Ilyas' },
     { id: 'yasmine', initials: 'YA', name: 'Yasmine' },
     { id: 'lina', initials: 'LI', name: 'Lina' },
     { id: 'mehdi', initials: 'ME', name: 'Mehdi' },
@@ -82,4 +88,12 @@ export const useGroupStore = create<GroupStore>(() => ({
     { id: 'study-plan', groupId: 'study-group', title: 'Study session', status: 'confirmed', startsAt: nextThursdayAtTwo() },
   ],
   votes: [],
+  setAvailabilityVisibility: (groupId, userId, availabilityVisibility) =>
+    set((state) => ({
+      memberships: state.memberships.map((membership) =>
+        membership.groupId === groupId && membership.userId === userId
+          ? { ...membership, availabilityVisibility }
+          : membership
+      ),
+    })),
 }));
