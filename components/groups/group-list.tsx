@@ -6,6 +6,7 @@ import {
   type GroupMember,
 } from '@/lib/group-store';
 import { FlatList, View } from 'react-native';
+import { useRouter } from 'expo-router';
 
 function formatNextPlan(startsAt: string) {
   const date = new Date(startsAt);
@@ -19,6 +20,7 @@ function GroupSeparator() {
 }
 
 export function GroupList() {
+  const router = useRouter();
   const groups = useGroupStore((state) => state.groups);
   const members = useGroupStore((state) => state.members);
   const memberships = useGroupStore((state) => state.memberships);
@@ -57,7 +59,12 @@ export function GroupList() {
     <FlatList
       data={cardData}
       keyExtractor={(item) => item.group.id}
-      renderItem={({ item }) => <GroupCard data={item} />}
+      renderItem={({ item }) => (
+        <GroupCard
+          data={item}
+          onPress={() => router.push({ pathname: '/groups/[groupId]', params: { groupId: item.group.id } })}
+        />
+      )}
       ItemSeparatorComponent={GroupSeparator}
       showsVerticalScrollIndicator={false}
       contentContainerStyle={{ paddingHorizontal: 20, paddingTop: 40, paddingBottom: 16 }}
