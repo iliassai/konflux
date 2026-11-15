@@ -6,7 +6,8 @@ import {
   type GroupMember,
 } from '@/lib/group-store';
 import { FlatList, View } from 'react-native';
-import { useRouter } from 'expo-router';
+import { useFocusEffect, useRouter } from 'expo-router';
+import { useCallback, useRef, useState } from 'react';
 
 function formatNextPlan(startsAt: string) {
   const date = new Date(startsAt);
@@ -21,6 +22,16 @@ function GroupSeparator() {
 
 export function GroupList() {
   const router = useRouter();
+  const navigationLock = useRef(false);
+  const [isOpeningGroup, setIsOpeningGroup] = useState(false);
+
+  useFocusEffect(
+    useCallback(() => {
+      navigationLock.current = false;
+      setIsOpeningGroup(false);
+    }, [])
+  );
+
   const groups = useGroupStore((state) => state.groups);
   const members = useGroupStore((state) => state.members);
   const memberships = useGroupStore((state) => state.memberships);
@@ -62,7 +73,13 @@ export function GroupList() {
       renderItem={({ item }) => (
         <GroupCard
           data={item}
-          onPress={() => router.push({ pathname: '/groups/[groupId]', params: { groupId: item.group.id } })}
+          disabled={isOpeningGroup}
+          onPress={() => {
+            if (navigationLock.current) return;
+            navigationLock.current = true;
+            setIsOpeningGroup(true);
+            router.push({ pathname: '/groups/[groupId]', params: { groupId: item.group.id } });
+          }}
         />
       )}
       ItemSeparatorComponent={GroupSeparator}

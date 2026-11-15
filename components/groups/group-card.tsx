@@ -21,7 +21,15 @@ const visibilityLabels: Record<AvailabilityVisibility, string> = {
   full: 'Full',
 };
 
-export function GroupCard({ data, onPress }: { data: GroupCardData; onPress: () => void }) {
+export function GroupCard({
+  data,
+  onPress,
+  disabled = false,
+}: {
+  data: GroupCardData;
+  onPress: () => void;
+  disabled?: boolean;
+}) {
   const { group, members, totalMembers, visibility, pendingVoteCount, nextPlanLabel } = data;
   const summary = pendingVoteCount > 0
     ? `${pendingVoteCount} ${pendingVoteCount === 1 ? 'plan' : 'plans'} to vote`
@@ -31,8 +39,10 @@ export function GroupCard({ data, onPress }: { data: GroupCardData; onPress: () 
     <Pressable
       accessibilityRole="button"
       accessibilityLabel={`Open ${group.name}`}
+      accessibilityState={{ disabled }}
+      disabled={disabled}
       onPress={onPress}
-      className="active:opacity-80">
+      className={disabled ? 'opacity-70' : 'active:opacity-80'}>
       <Card className="gap-3 rounded-xl border border-border bg-card px-3 py-3 shadow-none">
         <View className="flex-row items-center justify-between gap-2">
           <Text className="flex-1 text-base font-semibold" numberOfLines={1}>{group.name}</Text>
