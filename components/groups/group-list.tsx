@@ -84,13 +84,7 @@ export function GroupList() {
       )}
       ItemSeparatorComponent={GroupSeparator}
       showsVerticalScrollIndicator={false}
-      contentContainerStyle={{ paddingHorizontal: 20, paddingTop: 40, paddingBottom: 16 }}
-      ListHeaderComponent={
-        <View className="mb-4 gap-1">
-          <Text className="text-xs text-muted-foreground">{groups.length} groups</Text>
-          <Text className="text-3xl font-bold">Groups</Text>
-        </View>
-      }
+      contentContainerStyle={{ paddingHorizontal: 20, paddingTop: 4, paddingBottom: 16 }}
       ListEmptyComponent={
         <View className="items-center py-12">
           <Text className="font-semibold">No groups yet</Text>

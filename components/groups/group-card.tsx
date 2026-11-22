@@ -54,9 +54,9 @@ export function GroupCard({
         </View>
         <View className="flex-row items-center justify-between gap-2">
           <MemberAvatarStack members={members} totalMembers={totalMembers} />
-          <Text className="text-xs text-muted-foreground" numberOfLines={1}>{summary}</Text>
+          <Text className="text-sm text-muted-foreground" numberOfLines={1}>{summary}</Text>
         </View>
-        <Text className="text-xs text-muted-foreground">
+        <Text className="text-sm text-muted-foreground">
           You show: <Text className="font-semibold text-foreground">{visibilityLabels[visibility]}</Text>
         </Text>
       </Card>

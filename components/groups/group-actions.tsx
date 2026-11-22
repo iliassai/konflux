@@ -7,9 +7,9 @@ export function GroupActions() {
     <View className="gap-3 px-5 pb-4 pt-2">
       <Button
         size="lg"
-        className="h-12 w-full rounded-xl"
+        className="h-14 w-full rounded-2xl"
         onPress={() => Alert.alert('New group', 'Group creation will be added later.')}>
-        <Text>+ New group</Text>
+        <Text className="text-base font-semibold">+ New group</Text>
       </Button>
       <Button
         variant="outline"

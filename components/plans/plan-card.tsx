@@ -40,14 +40,14 @@ export function PlanCard({ data }: { data: PlanCardData }) {
 
   return (
     <View className="gap-1.5">
-      <Card className="flex-row items-center justify-between gap-3 rounded-2xl border border-border bg-card px-4 py-3 shadow-none">
+      <Card className="flex-row items-center justify-between gap-3 rounded-xl border border-border bg-card px-3 py-3 shadow-none">
         <View className="flex-1 gap-0.5">
           <Text className="text-base font-semibold" numberOfLines={1}>{plan.title}</Text>
           <Text className="text-sm text-muted-foreground" numberOfLines={1}>
             {groupName} · {formatDuration(plan.durationMinutes)}
           </Text>
         </View>
-        <Text className="font-semibold text-muted-foreground">{statusLabel}</Text>
+        <Text className="text-sm font-semibold text-muted-foreground">{statusLabel}</Text>
       </Card>
       <Text className="px-1 text-sm text-muted-foreground">{summary}</Text>
     </View>

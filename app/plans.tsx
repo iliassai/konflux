@@ -1,6 +1,7 @@
 import { PlanList } from '@/components/plans/plan-list';
 import { PlanViewToggle, type PlanListView } from '@/components/plans/plan-view-toggle';
 import { Button } from '@/components/ui/button';
+import { ScreenHeading } from '@/components/ui/screen-heading';
 import { Text } from '@/components/ui/text';
 import { usePlanStore } from '@/lib/plan-store';
 import { useState } from 'react';
@@ -14,10 +15,7 @@ export default function PlansScreen() {
   return (
     <View className="flex-1 bg-background">
       <View className="gap-5 px-5 pb-3 pt-10">
-        <View className="gap-1">
-          <Text className="text-base text-muted-foreground">{openPlanCount} open</Text>
-          <Text className="text-4xl font-bold">Plans</Text>
-        </View>
+        <ScreenHeading eyebrow={`${openPlanCount} open`} title="Plans" />
         <PlanViewToggle value={view} onChange={setView} />
       </View>
       <PlanList view={view} />
