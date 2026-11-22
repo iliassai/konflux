@@ -33,17 +33,17 @@ export default function RootLayout() {
           }}
         />
         <Tabs.Screen
-          name="plans"
-          options={{
-            title: 'Plans',
-            tabBarIcon: ({ color, size }) => <ListTodo color={color} size={size} />,
-          }}
-        />
-        <Tabs.Screen
           name="groups"
           options={{
             title: 'Groups',
             tabBarIcon: ({ color, size }) => <Users color={color} size={size} />,
+          }}
+        />
+        <Tabs.Screen
+          name="plans"
+          options={{
+            title: 'Plans',
+            tabBarIcon: ({ color, size }) => <ListTodo color={color} size={size} />,
           }}
         />
         <Tabs.Screen
