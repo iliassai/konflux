@@ -24,7 +24,12 @@ export function DefaultVisibilityPicker({ visible, value, onSelect, onClose }: D
   const colors = THEME[theme === 'dark' ? 'nord-dark' : 'nord-light'];
 
   return (
-    <Modal transparent animationType="fade" visible={visible} onRequestClose={onClose}>
+    <Modal
+      transparent
+      animationType="fade"
+      visible={visible}
+      statusBarTranslucent
+      onRequestClose={onClose}>
       <View className="flex-1 justify-end bg-black/40">
         <Pressable
           accessibilityRole="button"

@@ -21,63 +21,65 @@ export default function YouScreen() {
   const selectedTheme: AppTheme = hasAdaptiveThemes ? 'system' : theme;
 
   return (
-    <ScrollView
-      className="flex-1 bg-background"
-      showsVerticalScrollIndicator={false}
-      contentContainerClassName="gap-5 px-5 pb-8 pt-10">
-      <ScreenHeading eyebrow="Account" title="Me" />
-
-      <ProfileRow
-        initials="IE"
-        name="Ilyas"
-        email="Add email when account is connected"
-        onEdit={() => Alert.alert('Edit profile', 'Profile editing will be added later.')}
-      />
-
-      <View className="gap-3">
-        <PreferenceCard
-          title="Import phone calendar"
-          description="Fills busy blocks automatically"
-          value={calendarImportEnabled}
-          onValueChange={setCalendarImportEnabled}
-        />
-        <PreferenceCard
-          title="Notifications"
-          description="Invites, votes and reminders"
-          value={notificationsEnabled}
-          onValueChange={setNotificationsEnabled}
-        />
-        <PreferenceCard
-          title="Home screen widget"
-          description="Today's agenda"
-          value={widgetEnabled}
-          onValueChange={setWidgetEnabled}
+    <View className="flex-1 bg-background">
+      <View className="gap-4 px-5 pb-3 pt-10">
+        <ScreenHeading eyebrow="Account" title="Me" />
+        <ProfileRow
+          initials="IE"
+          name="Ilyas"
+          email="Add email when account is connected"
+          onEdit={() => Alert.alert('Edit profile', 'Profile editing will be added later.')}
         />
       </View>
+      <ScrollView
+        className="flex-1"
+        showsVerticalScrollIndicator={false}
+        contentContainerClassName="gap-5 px-5 pb-8 pt-2">
+        <View className="gap-3">
+          <PreferenceCard
+            title="Import phone calendar"
+            description="Fills busy blocks automatically"
+            value={calendarImportEnabled}
+            onValueChange={setCalendarImportEnabled}
+          />
+          <PreferenceCard
+            title="Notifications"
+            description="Invites, votes and reminders"
+            value={notificationsEnabled}
+            onValueChange={setNotificationsEnabled}
+          />
+          <PreferenceCard
+            title="Home screen widget"
+            description="Today's agenda"
+            value={widgetEnabled}
+            onValueChange={setWidgetEnabled}
+          />
+        </View>
 
-      <DefaultSharingRow value={defaultVisibility} onPress={() => setVisibilityPickerVisible(true)} />
-      <DefaultVisibilityPicker
-        visible={visibilityPickerVisible}
-        value={defaultVisibility}
-        onSelect={(value) => {
-          setDefaultVisibility(value);
-          setVisibilityPickerVisible(false);
-        }}
-        onClose={() => setVisibilityPickerVisible(false)}
-      />
+        <DefaultSharingRow value={defaultVisibility} onPress={() => setVisibilityPickerVisible(true)} />
+        <DefaultVisibilityPicker
+          visible={visibilityPickerVisible}
+          value={defaultVisibility}
+          onSelect={(value) => {
+            setDefaultVisibility(value);
+            setVisibilityPickerVisible(false);
+          }}
+          onClose={() => setVisibilityPickerVisible(false)}
+        />
 
-      <View className="gap-3">
-        <Text className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Theme</Text>
-        <ThemeSelector value={selectedTheme} onChange={(value) => Uniwind.setTheme(value)} />
-      </View>
+        <View className="gap-3">
+          <Text className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Theme</Text>
+          <ThemeSelector value={selectedTheme} onChange={(value) => Uniwind.setTheme(value)} />
+        </View>
 
-      <Button
-        variant="outline"
-        size="lg"
-        className="h-14 w-full rounded-2xl"
-        onPress={() => Alert.alert('Sign out', 'Sign out will be available after authentication is added.')}>
-        <Text className="text-base font-semibold">Sign out</Text>
-      </Button>
-    </ScrollView>
+        <Button
+          variant="outline"
+          size="lg"
+          className="h-14 w-full rounded-2xl"
+          onPress={() => Alert.alert('Sign out', 'Sign out will be available after authentication is added.')}>
+          <Text className="text-base font-semibold">Sign out</Text>
+        </Button>
+      </ScrollView>
+    </View>
   );
 }
