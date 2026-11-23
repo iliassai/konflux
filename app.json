@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "minimal",
+    "name": "Konflux",
     "slug": "minimal",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "minimal",
@@ -18,7 +18,7 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.konfluxexpo.minimal"
+      "package": "com.konfluxexpo.konflux"
     },
     "web": {
       "bundler": "metro",
