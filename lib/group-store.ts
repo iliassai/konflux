@@ -20,6 +20,18 @@ export type GroupMembership = {
   availabilityVisibility: AvailabilityVisibility;
 };
 
+export type GroupInvite = {
+  id: string;
+  groupId: string;
+  code: string;
+  createdAt: string;
+};
+
+export type GroupCreationResult = {
+  group: Group;
+  invite: GroupInvite;
+};
+
 export type GroupPlan = {
   id: string;
   groupId: string;
@@ -47,8 +59,10 @@ type GroupStore = {
   groups: Group[];
   members: GroupMember[];
   memberships: GroupMembership[];
+  invites: GroupInvite[];
   plans: GroupPlan[];
   votes: PlanVote[];
+  createGroup: (name: string, visibility: AvailabilityVisibility) => GroupCreationResult;
   setAvailabilityVisibility: (
     groupId: string,
     userId: string,
@@ -56,7 +70,21 @@ type GroupStore = {
   ) => void;
 };
 
-export const useGroupStore = create<GroupStore>((set) => ({
+const INVITE_CODE_CHARACTERS = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+
+function createInviteCode(existingCodes: string[]) {
+  let code = '';
+
+  do {
+    code = Array.from({ length: 6 }, () =>
+      INVITE_CODE_CHARACTERS[Math.floor(Math.random() * INVITE_CODE_CHARACTERS.length)]
+    ).join('');
+  } while (existingCodes.includes(code));
+
+  return code;
+}
+
+export const useGroupStore = create<GroupStore>((set, get) => ({
   groups: [
     { id: 'gaming-crew', name: 'Gaming crew', memberIds: ['sam', 'omar', 'hana', 'ilyas'] },
     { id: 'study-group', name: 'Study group', memberIds: ['yasmine', 'lina', 'mehdi', 'adam', 'nora'] },
@@ -83,11 +111,41 @@ export const useGroupStore = create<GroupStore>((set) => ({
     { groupId: 'study-group', userId: CURRENT_USER_ID, availabilityVisibility: 'titles' },
     { groupId: 'family', userId: CURRENT_USER_ID, availabilityVisibility: 'full' },
   ],
+  invites: [],
   plans: [
     { id: 'gaming-plan', groupId: 'gaming-crew', title: 'Valorant night', status: 'voting', startsAt: null },
     { id: 'study-plan', groupId: 'study-group', title: 'Study session', status: 'confirmed', startsAt: nextThursdayAtTwo() },
   ],
   votes: [],
+  createGroup: (name, visibility) => {
+    const code = createInviteCode(get().invites.map((invite) => invite.code));
+
+    const group: Group = {
+      id: `group-${Date.now()}-${code.toLowerCase()}`,
+      name: name.trim(),
+      memberIds: [CURRENT_USER_ID],
+    };
+    const invite: GroupInvite = {
+      id: `invite-${code.toLowerCase()}`,
+      groupId: group.id,
+      code,
+      createdAt: new Date().toISOString(),
+    };
+
+    set((state) => ({
+      groups: [...state.groups, group],
+      members: state.members.some((member) => member.id === CURRENT_USER_ID)
+        ? state.members
+        : [...state.members, { id: CURRENT_USER_ID, initials: 'IE', name: 'You' }],
+      memberships: [
+        ...state.memberships,
+        { groupId: group.id, userId: CURRENT_USER_ID, availabilityVisibility: visibility },
+      ],
+      invites: [...state.invites, invite],
+    }));
+
+    return { group, invite };
+  },
   setAvailabilityVisibility: (groupId, userId, availabilityVisibility) =>
     set((state) => ({
       memberships: state.memberships.map((membership) =>

@@ -1,14 +1,17 @@
 import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
+import { useRouter } from 'expo-router';
 import { Alert, View } from 'react-native';
 
 export function GroupActions() {
+  const router = useRouter();
+
   return (
     <View className="gap-3 px-5 pb-4 pt-2">
       <Button
         size="lg"
         className="h-14 w-full rounded-2xl"
-        onPress={() => Alert.alert('New group', 'Group creation will be added later.')}>
+        onPress={() => router.push('/groups/create')}>
         <Text className="text-base font-semibold">+ New group</Text>
       </Button>
       <Button

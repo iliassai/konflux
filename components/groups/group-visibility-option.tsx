@@ -9,6 +9,13 @@ export type VisibilityOption = {
   description: string;
 };
 
+export const GROUP_VISIBILITY_OPTIONS: VisibilityOption[] = [
+  { value: 'hidden', title: 'Hidden', description: 'Nothing at all' },
+  { value: 'busy_only', title: 'Busy only', description: 'Blocks marked busy, no details' },
+  { value: 'titles', title: 'Titles', description: 'Event names only' },
+  { value: 'full', title: 'Full', description: 'Names, notes and location' },
+];
+
 type GroupVisibilityOptionProps = {
   option: VisibilityOption;
   selected: boolean;
